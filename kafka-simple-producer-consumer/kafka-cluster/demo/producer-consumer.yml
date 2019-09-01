@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  producer:
+    image: vinsdocker/kafka-producer
+    environment:
+      - BROKER=kafka1:19091
+  consumer:
+    image: vinsdocker/kafka-consumer
+    environment:
+      - BROKER=kafka2:19092
+      - MESSAGE_PROCESSING_TIME=2000
