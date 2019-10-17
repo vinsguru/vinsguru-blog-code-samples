@@ -1,0 +1,16 @@
+version: "3"
+services:
+  fact-service:
+    image: vinsdocker/fact-service
+    environment:
+      - ACTIVE_PROFILE=prod
+  fib-service:
+    image: vinsdocker/fib-service
+    environment:
+      - ACTIVE_PROFILE=prod
+  compute-service:
+    image: vinsdocker/compute-service
+    environment:
+      - ACTIVE_PROFILE=prod
+    ports:
+      - 8080:8080

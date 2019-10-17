@@ -1,0 +1,8 @@
+server:
+  port: 8080
+
+factservice:
+  host: fact-service.local:8080
+
+fibservice:
+  host: fib-service.local:8080
