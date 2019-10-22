@@ -14,14 +14,17 @@ import java.util.concurrent.ThreadLocalRandom;
 @RequestMapping("v1")
 public class RatingController {
 
+    private static final int MIN = 5_000;
+    private static final int MAX = 10_000;
+
     @Autowired
     private RatingService ratingService;
 
     @GetMapping("/ratings/{prodId}")
     public ProductRatingDTO getRating(@PathVariable int prodId) throws InterruptedException {
-        int sleepTime = 30_000;
-        System.out.println("Rating service will respond in " + sleepTime + " ms");
-        Thread.sleep(sleepTime);
+        int random = ThreadLocalRandom.current().nextInt(MIN, MAX);
+        System.out.println("Rating service will respond in " + random + " ms");
+        Thread.sleep(random);
         return this.ratingService.getRatingForProduct(prodId);
     }
 
