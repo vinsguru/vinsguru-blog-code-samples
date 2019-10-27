@@ -29,6 +29,4 @@ public class RatingServiceImpl implements RatingService {
         return new ProductRatingDTO();
     }
 
-
-
 }

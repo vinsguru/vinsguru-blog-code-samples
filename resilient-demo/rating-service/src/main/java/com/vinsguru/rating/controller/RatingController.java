@@ -14,7 +14,7 @@ import java.util.concurrent.ThreadLocalRandom;
 @RequestMapping("v1")
 public class RatingController {
 
-    private static final int MIN = 5_000;
+    private static final int MIN = 2_500;
     private static final int MAX = 10_000;
 
     @Autowired
