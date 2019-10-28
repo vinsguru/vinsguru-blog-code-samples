@@ -2,19 +2,14 @@ management.endpoints.web.exposure.include: '*'
 management.endpoint.health.show-details: always
 management.health.circuitbreakers.enabled: true
 server:
+  tomcat:
+    max-threads: 15
   port: 8082
 rating:
   service:
     url: http://localhost:8081/v1/ratings
-resilience4j.circuitbreaker:
-  configs:
-    default:
-      slidingWindowType: COUNT_BASED
-      slidingWindowSize: 100
-      permittedNumberOfCallsInHalfOpenState: 10
-      waitDurationInOpenState: 10
-      failureRateThreshold: 60
-      registerHealthIndicator: true
+resilience4j.bulkhead:
   instances:
     ratingService:
-      baseConfig: default
+      maxConcurrentCalls: 10
+      maxWaitDuration: 10ms

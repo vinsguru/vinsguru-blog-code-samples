@@ -2,6 +2,7 @@ package com.vinsguru.products.service.impl;
 
 import com.vinsguru.dto.ProductRatingDTO;
 import com.vinsguru.products.service.RatingService;
+import io.github.resilience4j.bulkhead.annotation.Bulkhead;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,10 +19,16 @@ public class RatingServiceImpl implements RatingService {
     private RestTemplate restTemplate;
 
     @Override
-    @CircuitBreaker(name = "ratingService", fallbackMethod = "getFallbackRatings")
+    @Bulkhead(name = "ratingService", fallbackMethod = "getFallbackRatings", type = Bulkhead.Type.SEMAPHORE)
     public ProductRatingDTO getRatings(int productId) {
         String url = this.ratingServiceUrl + "/" + productId;
-        return this.restTemplate.getForObject(url, ProductRatingDTO.class);
+        ProductRatingDTO productRatingDTO = new ProductRatingDTO();
+        try{
+            productRatingDTO = this.restTemplate.getForObject(url, ProductRatingDTO.class);
+        }catch (Exception e){
+           // e.printStackTrace();
+        }
+        return productRatingDTO;
     }
 
     public ProductRatingDTO getFallbackRatings(int productId, Exception e) {
