@@ -1,0 +1,32 @@
+version: '3'
+services:
+  master:
+    container_name: master
+    image: redis
+    ports:
+      - 6379:6379
+  slave-1:
+    container_name: slave-1
+    image: redis
+    ports:
+      - 16379:6379
+    volumes:
+      - ./conf:/usr/local/etc/redis/
+    command: redis-server /usr/local/etc/redis/redis.conf
+  slave-2:
+    container_name: slave-2
+    image: redis
+    ports:
+      - 26379:6379
+    volumes:
+      - ./conf:/usr/local/etc/redis/
+    command: redis-server /usr/local/etc/redis/redis.conf    
+  redis-commander:
+    container_name: redis-commander
+    hostname: redis-commander
+    image: rediscommander/redis-commander:latest
+    restart: always
+    environment:
+    - REDIS_HOSTS=master:master,slave-1:slave-1,slave-2:slave-2
+    ports:
+    - 8081:8081
