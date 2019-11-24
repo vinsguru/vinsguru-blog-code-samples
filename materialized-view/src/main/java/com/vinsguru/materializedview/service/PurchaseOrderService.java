@@ -1,6 +1,10 @@
 package com.vinsguru.materializedview.service;
 
-public interface PurchaseOrderService {
-    void placeOrder();
+import com.vinsguru.materializedview.dto.PurchaseOrderSummaryDto;
 
+import java.util.List;
+
+public interface PurchaseOrderService {
+    void placeOrder(int userIndex, int productIndex);
+    List<PurchaseOrderSummaryDto> getSaleSummary();
 }

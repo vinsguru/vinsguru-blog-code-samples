@@ -2,6 +2,7 @@ package com.vinsguru.materializedview.service;
 
 import com.github.javafaker.Faker;
 import com.vinsguru.materializedview.entity.Product;
+import com.vinsguru.materializedview.entity.PurchaseOrder;
 import com.vinsguru.materializedview.entity.User;
 import com.vinsguru.materializedview.repository.ProductRepository;
 import com.vinsguru.materializedview.repository.PurchaseOrderRepository;
@@ -34,15 +35,29 @@ public class DataGenerator implements CommandLineRunner {
         Faker faker = new Faker();
         //
         //this.createUsers(faker);
+        //this.createProducts(faker);
+/*        IntStream.range(0, 10)
+                .forEach(i -> this.createOrder(faker));*/
+        //this.createOrder(faker);
 
-
-
-        System.out.println("Created users");
+        //System.out.println("Created users");
     }
 
-    private void createOrder(){
+    private void createOrder(Faker faker){
+        List<Product> products = this.productRepository.findAll();
+        List<User> users = this.userRepository.findAll();
 
-
+        List<PurchaseOrder> purchaseOrders = IntStream.range(0, 100_000)
+                .mapToObj(i -> {
+                    int userIndex = faker.number().numberBetween(0, 10000);
+                    int prodIndex = faker.number().numberBetween(0, 1000);
+                    PurchaseOrder purchaseOrder = new PurchaseOrder();
+                    purchaseOrder.setUserId(users.get(userIndex).getId());
+                    purchaseOrder.setProductId(products.get(prodIndex).getId());
+                    return purchaseOrder;
+                })
+                .collect(Collectors.toList());
+        this.purchaseOrderRepository.saveAll(purchaseOrders);
     }
 
     private void createUsers(Faker faker){
