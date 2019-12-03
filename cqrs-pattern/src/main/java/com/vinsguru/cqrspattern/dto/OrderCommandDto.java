@@ -1,6 +1,7 @@
 package com.vinsguru.cqrspattern.dto;
 
 public class OrderCommandDto {
+
     private int userIndex;
     private int productIndex;
 

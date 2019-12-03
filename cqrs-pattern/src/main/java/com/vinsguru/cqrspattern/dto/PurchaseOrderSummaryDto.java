@@ -4,6 +4,14 @@ public class PurchaseOrderSummaryDto {
     private String state;
     private double totalSale;
 
+    public PurchaseOrderSummaryDto(){
+    }
+
+    public PurchaseOrderSummaryDto(String state, double totalSale) {
+        this.state = state;
+        this.totalSale = totalSale;
+    }
+
     public String getState() {
         return state;
     }

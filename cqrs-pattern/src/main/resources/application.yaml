@@ -5,4 +5,6 @@ spring:
     password: admin
 app:
   write:
-    enabled: true
+    enabled: false
+
+

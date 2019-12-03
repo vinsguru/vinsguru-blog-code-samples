@@ -5,5 +5,7 @@ import com.vinsguru.cqrspattern.dto.PurchaseOrderSummaryDto;
 import java.util.List;
 
 public interface OrderQueryService {
-    List<PurchaseOrderSummaryDto> getSaleSummary();
+    List<PurchaseOrderSummaryDto> getSaleSummaryGroupByState();
+    PurchaseOrderSummaryDto getSaleSummaryByState(String state);
+    double getTotalSale();
 }
