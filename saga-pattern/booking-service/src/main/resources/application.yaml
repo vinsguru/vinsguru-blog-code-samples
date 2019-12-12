@@ -1,0 +1,14 @@
+server:
+  port: 8081
+spring:
+  kafka:
+    client-id: booking-service
+    bootstrap-servers:
+      - localhost:9091
+      - localhost:9092
+      - localhost:9093
+---
+kafka:
+  topic:
+    input: trip-request-event
+    output: trip-response-event
