@@ -4,6 +4,7 @@ import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.streams.StreamsBuilder;
 import org.apache.kafka.streams.StreamsConfig;
 import org.apache.kafka.streams.kstream.KStream;
+import org.apache.kafka.streams.kstream.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
@@ -14,6 +15,7 @@ import org.springframework.kafka.annotation.EnableKafkaStreams;
 import org.springframework.kafka.annotation.KafkaStreamsDefaultConfiguration;
 import org.springframework.kafka.config.KafkaStreamsConfiguration;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -44,8 +46,20 @@ public class KafkaStreamProcessor {
     @Bean
     public KStream<String, Long> kStream(StreamsBuilder kStreamBuilder) {
         KStream<String, Long> stream = kStreamBuilder.stream(inputTopic);
-        this.oddNumberProcessor.process(stream);
-        this.evenNumberProcessor.process(stream);
+
+        Predicate<String, Long> is10 = (k, v) -> v == 10;
+        Predicate<String, Long> isDivisibleBy5 = (k, v) -> (v % 5) == 0;
+        Predicate<String, Long> isEven = (k, v) -> v % 2 != 0;
+        KStream<String, Long>[] branches = stream.branch(is10, isDivisibleBy5, isEven);
+
+        branches[0].mapValues(v -> v + 20).to("double-output");
+        branches[1].mapValues(v -> v + 10_000).to("double-output");
+        branches[2].mapValues(v -> v * (-1)).to("double-output");
+
+        Arrays.stream(branches)
+                .forEach(b -> b.to("double-output"));
+
+      //  stream.;
         return stream;
     }
 
