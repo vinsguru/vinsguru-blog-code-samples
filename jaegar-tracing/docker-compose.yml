@@ -1,0 +1,23 @@
+version: "3"
+services:
+  fact-service:
+    image: vinsdocker/fact-service
+    environment:
+      - ACTIVE_PROFILE=prod
+      - SPRING_APPLICATION_NAME=fact
+  fib-service:
+    image: vinsdocker/fib-service
+    environment:
+      - ACTIVE_PROFILE=prod
+      - SPRING_APPLICATION_NAME=fib
+  compute-service:
+    image: vinsdocker/compute-service
+    environment:
+      - ACTIVE_PROFILE=prod
+      - SPRING_APPLICATION_NAME=compute
+    ports:
+      - 8080:8080
+  jaeger:
+    image: jaegertracing/all-in-one:1.17
+    ports:
+      - 8090:16686
