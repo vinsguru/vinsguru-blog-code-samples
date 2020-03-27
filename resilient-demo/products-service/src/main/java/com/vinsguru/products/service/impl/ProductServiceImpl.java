@@ -8,8 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -32,6 +35,11 @@ public class ProductServiceImpl implements ProductService {
         ProductRatingDTO productRating = this.ratingService.getRatings(productId);
         dto.setProductRating(productRating);
         return dto;
+    }
+
+    @Override
+    public List<ProductDTO> getProducts() {
+        return new ArrayList<>(this.map.values());
     }
 
     private ProductDTO getProduct(int productId, String description, double price){
