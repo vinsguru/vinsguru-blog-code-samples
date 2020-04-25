@@ -1,0 +1,14 @@
+server:
+  port: 8080
+spring.cloud.stream:
+  function:
+    definition: orderEventPublisher;orderEventProcessor;paymentEventConsumer
+  bindings:
+    orderEventPublisher-out-0:
+      destination: order-events
+    orderEventProcessor-in-0:
+      destination: order-events
+    orderEventProcessor-out-0:
+      destination: payment-events
+    paymentEventConsumer-in-0:
+      destination: payment-events
