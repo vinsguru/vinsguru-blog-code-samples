@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package vinsmath;
+
+option java_package = "com.vinsguru.model";
+option java_multiple_files = true;
+
+message Input {
+  int32 number = 1;
+}
+
+message Output {
+  int32 number = 1;
+  int32 result = 2;
+}
+
+message ReadRequest {
+  string name = 1;
+}
+
+message ReadResponse {
+  string content = 1;
+}
+
+service CPUIOService {
+  rpc findSquareUnary(Input) returns (Output) {};
+  rpc findSquareStream(Input) returns (stream Output) {};
+  rpc findSquareBiStream(stream Input) returns (stream Output) {};
+  rpc readFile(ReadRequest) returns (ReadResponse) {};
+}
