@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: car-service
+  name: car-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: car-service
+  template:
+    metadata:
+      labels:
+        app: car-service
+    spec:
+      containers:
+      - image: openresty/openresty:alpine
+        name: car-adapter
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+        - name: conf
+          mountPath: /etc/nginx/conf.d/     
+      - image: clue/json-server
+        name: car-service
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: db
+          mountPath: /data/
+      volumes:
+      - name: db
+        configMap:
+          name: carsdb
+      - name: conf
+        configMap:
+          name: nginxconf    
