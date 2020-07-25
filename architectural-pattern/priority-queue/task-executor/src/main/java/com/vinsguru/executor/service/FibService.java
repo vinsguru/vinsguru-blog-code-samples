@@ -1,4 +1,4 @@
-package com.vinsguru.priorityqueue.service;
+package com.vinsguru.executor.service;
 
 import org.springframework.stereotype.Service;
 

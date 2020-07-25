@@ -1,4 +1,4 @@
-package com.vinsguru.priorityqueue.model;
+package com.vinsguru.model;
 
 import java.io.Serializable;
 

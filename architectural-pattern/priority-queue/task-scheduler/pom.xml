@@ -9,9 +9,13 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>task-executor</artifactId>
+    <artifactId>task-scheduler</artifactId>
 
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.vinsguru</groupId>
             <artifactId>model</artifactId>
@@ -28,4 +32,5 @@
             <version>2.57</version>
         </dependency>
     </dependencies>
+
 </project>

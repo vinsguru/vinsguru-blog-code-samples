@@ -1,4 +1,4 @@
-package com.vinsguru.scheduler;
+package com.vinsguru.executor;
 
 import com.vinsguru.model.Task;
 import org.redisson.api.RPriorityBlockingQueue;
@@ -9,14 +9,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
+@EnableScheduling
 @SpringBootApplication
-public class TaskSchedulerApplication {
+public class TaskExecutorApplication {
 
 	@Autowired
 	private RedissonClient redissonClient;
 
 	public static void main(String[] args) {
-		SpringApplication.run(TaskSchedulerApplication.class, args);
+		SpringApplication.run(TaskExecutorApplication.class, args);
 	}
 
 	@Bean

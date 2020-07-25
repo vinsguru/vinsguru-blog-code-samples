@@ -1,0 +1,28 @@
+version: '3'
+services:
+  master:
+    container_name: master
+    image: redis
+    ports:
+      - 6379:6379
+  task-scheduler:
+    build: ./task-scheduler
+    image: vinsdocker/task-scheduler
+    ports:
+      - 8080:8080
+    environment:
+      - REDIS_HOST=master
+  task-executor:
+    build: ./task-executor
+    image: vinsdocker/task-executor
+    environment:
+      - REDIS_HOST=master
+  redis-commander:
+    container_name: redis-commander
+    hostname: redis-commander
+    image: rediscommander/redis-commander:latest
+    restart: always
+    environment:
+      - REDIS_HOSTS=master:master
+    ports:
+      - 8081:8081
