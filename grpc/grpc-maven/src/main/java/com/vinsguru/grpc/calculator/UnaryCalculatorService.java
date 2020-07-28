@@ -1,25 +1,18 @@
-package com.vinsguru.grpc.service;
+package com.vinsguru.grpc.calculator;
 
 import com.vinsguru.calculator.CalculatorServiceGrpc;
 import com.vinsguru.calculator.Input;
 import com.vinsguru.calculator.Output;
-import io.grpc.Status;
 import io.grpc.stub.StreamObserver;
 
 public class UnaryCalculatorService extends CalculatorServiceGrpc.CalculatorServiceImplBase {
 
     @Override
     public void findFactorial(Input request, StreamObserver<Output> responseObserver) {
-
         var input = request.getNumber();
 
-        // if the input is below 0, raise an error event
-        if(input < 0){
-            responseObserver.onError(
-                    Status.INVALID_ARGUMENT.augmentDescription("Input should be a positive int").asRuntimeException()
-            );
-            return;
-        }
+        // print host name
+        HostnamePrinter.print();
 
         // positive int
         long result = this.factorial(input);

@@ -25,7 +25,7 @@ public class BinaryStreamTest {
 
     @Test
     public void unaryServiceTest() throws InterruptedException {
-        StreamObserver<Input> inputStreamObserver = this.clientStub.playUpTo100(new StreamObserver<Output>() {
+        StreamObserver<Input> inputStreamObserver = this.clientStub.withWaitForReady().playUpTo100(new StreamObserver<Output>() {
             @Override
             public void onNext(Output output) {
                 System.out.println("Server sum : " + output.getResult());

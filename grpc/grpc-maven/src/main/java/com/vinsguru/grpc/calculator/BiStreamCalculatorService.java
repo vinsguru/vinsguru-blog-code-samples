@@ -1,4 +1,4 @@
-package com.vinsguru.grpc.service;
+package com.vinsguru.grpc.calculator;
 
 import com.vinsguru.calculator.CalculatorServiceGrpc;
 import com.vinsguru.calculator.Input;
@@ -9,6 +9,9 @@ public class BiStreamCalculatorService extends CalculatorServiceGrpc.CalculatorS
 
     @Override
     public StreamObserver<Input> playUpTo100(StreamObserver<Output> responseObserver) {
+        // print host name
+        HostnamePrinter.print();
+
         return new StreamObserver<>() {
 
             private int sum;

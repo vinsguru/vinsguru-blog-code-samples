@@ -6,9 +6,11 @@ import com.vinsguru.calculator.Output;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.concurrent.TimeUnit;
+import java.util.stream.IntStream;
 
 public class UnaryServiceTest {
 
@@ -17,21 +19,49 @@ public class UnaryServiceTest {
 
     @Before
     public void setup(){
-        this.channel = ManagedChannelBuilder.forAddress("localhost", 6565)
+        this.channel = ManagedChannelBuilder
+                            .forAddress("vins.example.com", 80)
+                            .idleTimeout(5000, TimeUnit.SECONDS)
                 .usePlaintext()
                 .build();
         this.clientStub = CalculatorServiceGrpc.newBlockingStub(channel);
     }
 
     @Test
-    public void unaryServiceTest(){
-        Input input = Input.newBuilder()
-                .setNumber(-5)
-                .build();
-        Output output = this.clientStub.findFactorial(input);
+    public void unaryServiceTest() throws InterruptedException {
 
-        //check the result
-        Assert.assertEquals(120, output.getResult());
+
+        IntStream.range(1, 20000)
+                .forEach(i -> {
+                    Input input = Input.newBuilder()
+                            .setNumber(25)
+                            .build();
+                    Output factorial = this.clientStub.findFactorial(input);
+                    System.out.println(factorial.getResult());
+                });
+
+        /*
+                      this.clientStub.findFactorial(input, new StreamObserver<Output>() {
+                        @Override
+                        public void onNext(Output output) {
+                            //check the result
+                            System.out.println("Output :: " + output.getResult());
+                        }
+
+                        @Override
+                        public void onError(Throwable throwable) {
+                            System.out.println(throwable.getMessage());
+                        }
+
+                        @Override
+                        public void onCompleted() {
+                            System.out.println("Done");
+                        }
+                    });
+         */
+
+
+        Thread.sleep(50000);
     }
 
     @After

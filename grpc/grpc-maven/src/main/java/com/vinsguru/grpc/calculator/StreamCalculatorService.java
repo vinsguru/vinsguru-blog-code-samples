@@ -1,4 +1,4 @@
-package com.vinsguru.grpc.service;
+package com.vinsguru.grpc.calculator;
 
 import com.vinsguru.calculator.CalculatorServiceGrpc;
 import com.vinsguru.calculator.Input;
@@ -13,6 +13,9 @@ public class StreamCalculatorService extends CalculatorServiceGrpc.CalculatorSer
     // input is 6, server will send 2, 4, 6, 8, 10, 12
     @Override
     public void getAllDoubles(Input request, StreamObserver<Output> responseObserver) {
+        // print host name
+        HostnamePrinter.print();
+
         int index  = request.getNumber();
         IntStream.rangeClosed(1, index)
                 .map(i -> i * 2)
