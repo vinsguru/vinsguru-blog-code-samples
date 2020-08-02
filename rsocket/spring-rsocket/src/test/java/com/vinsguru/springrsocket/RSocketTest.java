@@ -3,7 +3,7 @@ package com.vinsguru.springrsocket;
 import com.vinsguru.springrsocket.dto.MovieScene;
 import com.vinsguru.springrsocket.dto.TicketRequest;
 import com.vinsguru.springrsocket.dto.TicketStatus;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.messaging.rsocket.RSocketRequester;
