@@ -1,15 +1,18 @@
 package com.vinsguru.springrsocket.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.UUID;
 
 @Data
-@AllArgsConstructor
+@NoArgsConstructor
 public class TicketRequest {
 
     private UUID requestId;
     private TicketStatus status = TicketStatus.TICKET_PENDING;
 
+    public TicketRequest(UUID requestId) {
+        this.requestId = requestId;
+    }
 }
