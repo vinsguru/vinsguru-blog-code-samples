@@ -15,7 +15,7 @@ import java.util.Collections;
 import java.util.function.Function;
 
 @Controller
-public class MovieTheatreController {
+public class MovieTheaterController {
 
     @Autowired
     private MovieService movieService;
