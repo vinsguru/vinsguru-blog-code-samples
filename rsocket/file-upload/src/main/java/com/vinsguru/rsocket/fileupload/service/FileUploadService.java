@@ -11,7 +11,6 @@ import java.io.OutputStream;
 import java.nio.ByteBuffer;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 
 @Service
@@ -21,9 +20,6 @@ public class FileUploadService {
     private Path outputPath;
 
     public Mono<Status> getFilePath(Path path, Flux<ByteBuffer> bufferFlux) throws IOException {
-        System.out.println(
-                outputPath.resolve(path)
-        );
         var os = Files.newOutputStream(outputPath.resolve(path), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
         return bufferFlux
                     .doOnNext(b -> writeFile(os, b.array()))
