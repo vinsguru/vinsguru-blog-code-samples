@@ -30,22 +30,22 @@ class FileUploadApplicationTests {
     private Mono<RSocketRequester> rSocketRequester;
 
     @Test
-    public void uploadFile() throws IOException, InterruptedException {
+    public void uploadFile() throws InterruptedException {
         Path path = Paths.get("src/test/resources/input/ip.mp4");
         Flux<ByteBuffer> flux = Flux.using(this.ipStreamSupplier(path), streamProcessor(), closeStream());
         this.rSocketRequester
-                                        .map(r -> r.route("file.upload")
-                                                .metadata(metadataSpec -> {
-                                                    metadataSpec.metadata("mp4", MimeType.valueOf(Constants.MIME_FILE_EXTENSION));
-                                                    metadataSpec.metadata("output", MimeType.valueOf(Constants.MIME_FILE_NAME));
-                                                })
-                                                .data(flux)
-                                        )
-                                        .flatMapMany(r -> r.retrieveFlux(Status.class))
-                                        .doOnNext(s -> System.out.println("Upload Status : " + s))
-                                        .subscribe();
-        Thread.sleep(5000);
+                .map(r -> r.route("file.upload")
+                        .metadata(metadataSpec -> {
+                            metadataSpec.metadata("mp4", MimeType.valueOf(Constants.MIME_FILE_EXTENSION));
+                            metadataSpec.metadata("output", MimeType.valueOf(Constants.MIME_FILE_NAME));
+                        })
+                        .data(flux)
+                )
+                .flatMap(r -> r.retrieveFlux(Status.class).next())
+                .doOnNext(s -> System.out.println("Upload Status : " + s))
+                .subscribe();
 
+        Thread.sleep(5000);
     }
 
     private Callable<InputStream> ipStreamSupplier(Path path){
