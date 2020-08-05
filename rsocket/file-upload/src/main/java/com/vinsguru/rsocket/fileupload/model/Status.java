@@ -2,7 +2,7 @@ package com.vinsguru.rsocket.fileupload.model;
 
 public enum Status {
 
-    IN_PROGRESS,
+    CHUNK_COMPLETED,
     COMPLETED,
     FAILED;
 
