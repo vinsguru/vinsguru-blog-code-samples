@@ -18,7 +18,7 @@ public class FileUploadService {
     @Value("${output.file.path:src/test/resources/output}")
     private Path outputPath;
 
-    public Flux<Status> getFilePath(Path path, Flux<DataBuffer> bufferFlux) throws IOException {
+    public Flux<Status> uploadFile(Path path, Flux<DataBuffer> bufferFlux) throws IOException {
         Path opPath = outputPath.resolve(path);
         AsynchronousFileChannel channel = AsynchronousFileChannel.open(opPath, StandardOpenOption.CREATE, StandardOpenOption.WRITE);
         return DataBufferUtils.write(bufferFlux, channel)
