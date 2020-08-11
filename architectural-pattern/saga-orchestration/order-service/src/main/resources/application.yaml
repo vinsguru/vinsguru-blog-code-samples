@@ -1,0 +1,10 @@
+server:
+  port: 8080
+spring.cloud.stream:
+  function:
+    definition: supplier;consumer
+  bindings:
+    supplier-out-0:
+      destination: create-order
+    consumer-in-0:
+      destination: order-update
