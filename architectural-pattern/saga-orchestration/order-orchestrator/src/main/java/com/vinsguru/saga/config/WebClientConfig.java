@@ -11,7 +11,7 @@ public class WebClientConfig {
 
     @Bean
     @Qualifier("payment")
-    public WebClient paymentClient(@Value("service.endpoints.payment") String endpoint){
+    public WebClient paymentClient(@Value("${service.endpoints.payment}") String endpoint){
         return WebClient.builder()
                 .baseUrl(endpoint)
                 .build();
@@ -19,7 +19,7 @@ public class WebClientConfig {
 
     @Bean
     @Qualifier("inventory")
-    public WebClient inventoryClient(@Value("service.endpoints.inventory") String endpoint){
+    public WebClient inventoryClient(@Value("${service.endpoints.inventory}") String endpoint){
         return WebClient.builder()
                 .baseUrl(endpoint)
                 .build();
