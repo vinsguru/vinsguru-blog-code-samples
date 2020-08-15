@@ -24,4 +24,9 @@ public class ComputeController {
         return this.computeService.findFact(number);
     }
 
+    @GetMapping("/sum-fact/{number}")
+    public Long sumFact(@PathVariable int number){
+        return this.computeService.sumFact(number);
+    }
+
 }
