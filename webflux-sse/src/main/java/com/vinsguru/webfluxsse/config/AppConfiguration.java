@@ -1,0 +1,26 @@
+package com.vinsguru.webfluxsse.config;
+
+import com.vinsguru.webfluxsse.producer.Joke;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.DirectProcessor;
+
+@Configuration
+public class AppConfiguration {
+
+    private static final String JOKE_API_ENDPOINT = "https://official-joke-api.appspot.com/jokes/random";
+
+    @Bean
+    public WebClient webClient(){
+        return WebClient.builder()
+                    .baseUrl(JOKE_API_ENDPOINT)
+                    .build();
+    }
+
+    @Bean
+    public DirectProcessor<Joke> processor(){
+        return DirectProcessor.create();
+    }
+
+}

@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: task-executor
+  name: task-executor
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: task-executor
+  template:
+    metadata:
+      labels:
+        app: task-executor
+    spec:
+      containers:
+      - image: vinsdocker/task-executor
+        name: task-executor
+        env:
+        - name: REDIS_HOST
+          value: redis-master
+        resources:
+          requests:
+            cpu: 200m
+            memory: 512Mi

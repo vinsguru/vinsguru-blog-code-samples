@@ -1,0 +1,12 @@
+spring.cloud.stream:
+  function:
+    definition: producer;processor;consumer
+  bindings:
+    producer-out-0:
+      destination: numbers
+    processor-in-0:
+      destination: numbers
+    processor-out-0:
+      destination: squares
+    consumer-in-0:
+      destination: squares

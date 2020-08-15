@@ -1,0 +1,7 @@
+server:
+  port: 8080
+grpc:
+  client:
+    calculator-service:
+      address: static://localhost:6565
+      negotiationType: plaintext
