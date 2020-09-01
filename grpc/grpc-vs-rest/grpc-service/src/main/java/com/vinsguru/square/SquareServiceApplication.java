@@ -20,9 +20,9 @@ public class SquareServiceApplication {
     @Bean
     GrpcServerConfigurer grpcServerConfigurer() {
         return builder -> ((NettyServerBuilder) builder)
-                    .workerEventLoopGroup(new EpollEventLoopGroup(10))
-                    .bossEventLoopGroup(new EpollEventLoopGroup(10))
-                    .executor(Executors.newFixedThreadPool(50))
+                    .workerEventLoopGroup(new EpollEventLoopGroup(4))
+                    .bossEventLoopGroup(new EpollEventLoopGroup(4))
+                    .executor(Executors.newFixedThreadPool(4))
                     .channelType(EpollServerSocketChannel.class);
     }
 
