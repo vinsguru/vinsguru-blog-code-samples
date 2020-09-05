@@ -28,7 +28,7 @@ public class UnaryServiceTest {
     @Test
     public void unaryServiceTest(){
         Input input = Input.newBuilder()
-                .setNumber(-5)
+                .setNumber(5)
                 .build();
         Output output = this.clientStub.findFactorial(input);
 
