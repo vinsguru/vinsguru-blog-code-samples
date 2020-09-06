@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package calculator;
+
+option java_package = "com.vinsguru.calculator";
+option java_multiple_files = true;
+
+message Input {
+  int32 number = 1;
+}
+
+message Output {
+  int64 result = 1;
+}
+
+service CalculatorService {
+  // unary
+  rpc findFactorial(Input) returns (Output) {};
+  // server stream
+  rpc getAllDoubles(Input) returns (stream Output) {};
+  // client stream
+  rpc sumAll(stream Input) returns (Output) {};
+  // bi-directional stream
+  rpc playUpTo100(stream Input) returns (stream Output) {};
+}
