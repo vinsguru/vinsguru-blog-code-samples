@@ -19,49 +19,21 @@ public class UnaryServiceTest {
 
     @Before
     public void setup(){
-        this.channel = ManagedChannelBuilder
-                            .forAddress("vins.example.com", 80)
-                            .idleTimeout(5000, TimeUnit.SECONDS)
+        this.channel = ManagedChannelBuilder.forAddress("localhost", 6565)
                 .usePlaintext()
                 .build();
         this.clientStub = CalculatorServiceGrpc.newBlockingStub(channel);
     }
 
     @Test
-    public void unaryServiceTest() throws InterruptedException {
+    public void unaryServiceTest(){
+        Input input = Input.newBuilder()
+                .setNumber(5)
+                .build();
+        Output output = this.clientStub.findFactorial(input);
 
-
-        IntStream.range(1, 20000)
-                .forEach(i -> {
-                    Input input = Input.newBuilder()
-                            .setNumber(25)
-                            .build();
-                    Output factorial = this.clientStub.findFactorial(input);
-                    System.out.println(factorial.getResult());
-                });
-
-        /*
-                      this.clientStub.findFactorial(input, new StreamObserver<Output>() {
-                        @Override
-                        public void onNext(Output output) {
-                            //check the result
-                            System.out.println("Output :: " + output.getResult());
-                        }
-
-                        @Override
-                        public void onError(Throwable throwable) {
-                            System.out.println(throwable.getMessage());
-                        }
-
-                        @Override
-                        public void onCompleted() {
-                            System.out.println("Done");
-                        }
-                    });
-         */
-
-
-        Thread.sleep(50000);
+        //check the result
+        Assert.assertEquals(120, output.getResult());
     }
 
     @After
