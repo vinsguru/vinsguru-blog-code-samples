@@ -47,3 +47,4 @@
 **/.mvn/
 **/mvnw
 **/mvnw.cmd
+**/spring-grpc-math-service/

@@ -16,4 +16,5 @@ message Output {
 
 service SquareService {
   rpc findSquareUnary(Input) returns (Output) {};
+  rpc findSquareStream(stream Input) returns (stream Output) {};
 }
