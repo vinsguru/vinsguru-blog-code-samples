@@ -5,6 +5,6 @@ spring.cloud.stream:
     definition: supplier;consumer
   bindings:
     supplier-out-0:
-      destination: create-order
+      destination: order-created
     consumer-in-0:
-      destination: order-update
+      destination: order-updated
