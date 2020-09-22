@@ -1,0 +1,24 @@
+version: '3'
+services:
+  nats-server:
+    image: nats:alpine
+  nats-service:
+    build: ./nats-service
+    image: vinsdocker/nats-service
+    environment:
+      - NATS_SERVER=nats://nats-server:4222
+    depends_on:
+      - nats-server
+  rest-service:
+    build: ./rest-service
+    image: vinsdocker/rest-service
+  aggregator-service:
+    build: ./aggregator-service
+    image: vinsdocker/aggregator-service
+    depends_on:
+      - nats-server
+    ports:
+      - 8080:8080
+    environment:
+      - NATS_SERVER=nats://nats-server:4222
+      - REST_SQUARE_SERVICE_ENDPOINT=http://rest-service:7575
