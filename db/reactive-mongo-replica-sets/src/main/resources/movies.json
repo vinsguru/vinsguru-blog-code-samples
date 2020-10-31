@@ -1,0 +1,302 @@
+[
+  {
+    "title":"Code Name: K.O.Z.",
+    "year":2015,
+    "genre":"crime",
+    "imdbRating":1.6
+  },
+  {
+    "title":"Saving Christmas",
+    "year":2014,
+    "genre":"comedy",
+    "imdbRating":1.6
+  },
+  {
+    "title":"Superbabies: Baby Geniuses 2",
+    "year":2004,
+    "genre":"comedy",
+    "imdbRating":2
+  },
+  {
+    "title":"Daniel der Zauberer",
+    "year":2004,
+    "genre":"comedy",
+    "imdbRating":1.9
+  },
+  {
+    "title":"Manos: The Hands of Fate",
+    "year":1966,
+    "genre":"horror",
+    "imdbRating":1.9
+  },
+  {
+    "title":"Pledge This!",
+    "year":2006,
+    "genre":"comedy",
+    "imdbRating":1.9
+  },
+  {
+    "title":"Turks in Space",
+    "year":2006,
+    "genre":"action",
+    "imdbRating":1.9
+  },
+  {
+    "title":"Foodfight!",
+    "year":2012,
+    "genre":"animation",
+    "imdbRating":1.8
+  },
+  {
+    "title":"Birdemic: Shock and Terror",
+    "year":2010,
+    "genre":"horror",
+    "imdbRating":1.8
+  },
+  {
+    "title":"Dream.net",
+    "year":2009,
+    "genre":"comedy",
+    "imdbRating":2
+  },
+  {
+    "title":"Titanic: The Legend Goes On...",
+    "year":2000,
+    "genre":"animation",
+    "imdbRating":2
+  },
+  {
+    "title":"Disaster Movie",
+    "year":2008,
+    "genre":"comedy",
+    "imdbRating":1.9
+  },
+  {
+    "title":"Zombie Nation",
+    "year":2004,
+    "genre":"horror",
+    "imdbRating":1.9
+  },
+  {
+    "title":"The Hottie & the Nottie",
+    "year":2008,
+    "genre":"comedy",
+    "imdbRating":1.9
+  },
+  {
+    "title":"Keloglan vs. the Black Prince",
+    "year":2006,
+    "genre":"comedy",
+    "imdbRating":1.9
+  },
+  {
+    "title":"From Justin to Kelly",
+    "year":2003,
+    "genre":"comedy",
+    "imdbRating":2.1
+  },
+  {
+    "title":"A Fox's Tale",
+    "year":2008,
+    "genre":"animation",
+    "imdbRating":2.2
+  },
+  {
+    "title":"Ram Gopal Varma's Indian Flames",
+    "year":2007,
+    "genre":"action",
+    "imdbRating":1.9
+  },
+  {
+    "title":"Going Overboard",
+    "year":1989,
+    "genre":"comedy",
+    "imdbRating":1.9
+  },
+  {
+    "title":"Yes Sir",
+    "year":2007,
+    "genre":"action",
+    "imdbRating":2
+  },
+  {
+    "title":"Attack of the Jurassic Shark",
+    "year":2012,
+    "genre":"action",
+    "imdbRating":1.9
+  },
+  {
+    "title":"Potato Salad",
+    "year":2015,
+    "genre":"comedy",
+    "imdbRating":1.9
+  },
+  {
+    "title":"Ben & Arthur",
+    "year":2002,
+    "genre":"drama",
+    "imdbRating":1.9
+  },
+  {
+    "title":"The Legend of the Titanic",
+    "year":1999,
+    "genre":"animation",
+    "imdbRating":1.9
+  },
+  {
+    "title":"Himmatwala",
+    "year":2013,
+    "genre":"action",
+    "imdbRating":1.8
+  },
+  {
+    "title":"Birdemic 2: The Resurrection",
+    "year":2013,
+    "genre":"action",
+    "imdbRating":1.7
+  },
+  {
+    "title":"Monster a-Go Go",
+    "year":1965,
+    "genre":"horror",
+    "imdbRating":2
+  },
+  {
+    "title":"House of the Dead",
+    "year":2003,
+    "genre":"action",
+    "imdbRating":3
+  },
+  {
+    "title":"Who's Your Caddy?",
+    "year":2007,
+    "genre":"comedy",
+    "imdbRating":4
+  },
+  {
+    "title":"Humshakals",
+    "year":2014,
+    "genre":"comedy",
+    "imdbRating":2.3
+  },
+  {
+    "title":"Hobgoblins",
+    "year":1988,
+    "genre":"comedy",
+    "imdbRating":2.2
+  },
+  {
+    "title":"Glitter",
+    "year":2001,
+    "genre":"drama",
+    "imdbRating":2.2
+  },
+  {
+    "title":"The Beast of Yucca Flats",
+    "year":1961,
+    "genre":"horror",
+    "imdbRating":1.9
+  },
+  {
+    "title":"Son of the Mask",
+    "year":2005,
+    "genre":"comedy",
+    "imdbRating":1.9
+  },
+  {
+    "title":"Crossover",
+    "year":2006,
+    "genre":"action",
+    "imdbRating":1.8
+  },
+  {
+    "title":"Space Mutiny",
+    "year":1988,
+    "genre":"action",
+    "imdbRating":2.2
+  },
+  {
+    "title":"Night Train to Mundo Fine",
+    "year":1966,
+    "genre":"action",
+    "imdbRating":1.9
+  },
+  {
+    "title":"Extra Terrestrial Visitors",
+    "year":1983,
+    "genre":"sci-fi",
+    "imdbRating":1.9
+  },
+  {
+    "title":"Dracula 3000",
+    "year":2004,
+    "genre":"horror",
+    "imdbRating":1.8
+  },
+  {
+    "title":"The Wild World of Batwoman",
+    "year":1966,
+    "genre":"action",
+    "imdbRating":2.2
+  },
+  {
+    "title":"Surf School",
+    "year":2006,
+    "genre":"comedy",
+    "imdbRating":1.9
+  },
+  {
+    "title":"Epic Movie",
+    "year":2007,
+    "genre":"adventure",
+    "imdbRating":1.9
+  },
+  {
+    "title":"Alone in the Dark",
+    "year":2005,
+    "genre":"action",
+    "imdbRating":1.8
+  },
+  {
+    "title":"The Starfighters",
+    "year":1964,
+    "genre":"drama",
+    "imdbRating":2.2
+  },
+  {
+    "title":"Leonard Part 6",
+    "year":1987,
+    "genre":"action",
+    "imdbRating":2.2
+  },
+  {
+    "title":"Final Justice",
+    "year":1985,
+    "genre":"action",
+    "imdbRating":1.9
+  },
+  {
+    "title":"Eegah",
+    "year":1962,
+    "genre":"comedy",
+    "imdbRating":1.9
+  },
+  {
+    "title":"Die Hard Dracula",
+    "year":1998,
+    "genre":"comedy",
+    "imdbRating":2.2
+  },
+  {
+    "title":"The Class",
+    "year":2007,
+    "genre":"comedy",
+    "imdbRating":1.9
+  },
+  {
+    "title":"United Passions",
+    "year":2014,
+    "genre":"drama",
+    "imdbRating":1.9
+  }
+]
