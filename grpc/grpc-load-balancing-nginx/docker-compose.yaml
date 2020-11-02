@@ -1,0 +1,20 @@
+version: "3"
+services:
+  grpc-server1:
+    build: .
+    image: vinsdocker/grpc-server
+    hostname: server1
+  grpc-server2:
+    image: vinsdocker/grpc-server
+    hostname: server2
+    depends_on:
+      - grpc-server1
+  nginx:
+    image: nginx:1.15-alpine
+    depends_on:
+      - grpc-server1
+      - grpc-server2    
+    volumes:
+      - ./nginx-conf/conf:/etc/nginx/conf.d
+    ports:
+      - 6565:6565

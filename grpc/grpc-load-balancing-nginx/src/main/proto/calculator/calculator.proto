@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package calculator;
+
+option java_package = "com.vinsguru.calculator";
+option java_multiple_files = true;
+
+message Input {
+  int32 number = 1;
+}
+
+message Output {
+  int64 result = 1;
+}
+
+service CalculatorService {
+  // unary
+  rpc findFactorial(Input) returns (Output) {};
+}
