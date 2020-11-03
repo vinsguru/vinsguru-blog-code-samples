@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package gps;
+
+option java_package = "com.vinsguru.gps";
+option java_multiple_files = true;
+
+
+message TripRequest {
+  int32 distanceTravelled = 1;
+}
+
+message TripResponse {
+  int32 remainingDistance = 1;
+  int32 timeToDestination = 2;
+}
+
+service NavigationService {
+  // bi-directional stream
+  rpc navigate(stream TripRequest) returns (stream TripResponse);
+}
