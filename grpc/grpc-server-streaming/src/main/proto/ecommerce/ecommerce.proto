@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package ecommerce;
+
+option java_package = "com.vinsguru.ecommerce";
+option java_multiple_files = true;
+
+enum Category {
+  ELECTRONICS = 0;
+  EBOOKS = 1;
+}
+
+enum Status {
+  PAYMENT_RECEIVED = 0;
+  SHIPPED = 1;
+  OUT_FOR_DELIVERY = 2;
+  DELIVERED = 3;
+}
+
+message OrderRequest {
+  Category orderCategory = 1;
+}
+
+message OrderResponse {
+  Status orderStatus = 1;
+}
+
+service ECommerceService {
+  // server stream
+  rpc placeOrder(OrderRequest) returns (stream OrderResponse);
+}
