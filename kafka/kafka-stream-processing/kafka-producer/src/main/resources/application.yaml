@@ -1,0 +1,6 @@
+spring.cloud.stream:
+      function:
+        defintion: numberProducer
+      bindings:
+        process-out-0:
+          destination: numbers

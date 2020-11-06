@@ -1,0 +1,6 @@
+spring.cloud.stream:
+      function:
+        defintion: squaredNumberConsumer
+      bindings:
+        squaredNumberConsumer-in-0:
+        destination: squaredNumbers
