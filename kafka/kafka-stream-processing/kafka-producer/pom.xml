@@ -11,5 +11,11 @@
 
     <artifactId>kafka-producer</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-stream-binder-kafka</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>

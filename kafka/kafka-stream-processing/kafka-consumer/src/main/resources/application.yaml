@@ -1,0 +1,11 @@
+spring.cloud.stream:
+  function:
+    definition: squaredNumberConsumer
+  bindings:
+    squaredNumberConsumer-in-0:
+      destination: squaredNumbers
+  kafka:
+    binder:
+      brokers:
+        - localhost:9091
+        - localhost:9092

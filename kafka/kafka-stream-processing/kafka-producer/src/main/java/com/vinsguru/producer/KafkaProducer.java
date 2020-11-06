@@ -16,9 +16,10 @@ public class KafkaProducer {
     * */
 
     @Bean
-    public Supplier<Flux<Integer>> numberProducer(){
+    public Supplier<Flux<Long>> numberProducer(){
         return () -> Flux.range(1, 1000)
-                         .delayElements(Duration.ofSeconds(1));
+                        .map(i -> (long) i)
+                        .delayElements(Duration.ofSeconds(1));
     };
 
 }
