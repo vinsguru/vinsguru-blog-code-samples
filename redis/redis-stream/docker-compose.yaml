@@ -1,0 +1,29 @@
+version: '3'
+services:
+  redis:
+    image: redis
+    ports:
+      - 6379:6379
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+    depends_on:
+      - redis
+    environment:
+      - REDIS_HOSTS=redis:redis
+    ports:
+      - 8081:8081
+  producer:
+    build: ./redis-stream-producer
+    image: vinsdocker/redis-stream-producer
+    depends_on:
+      - redis
+    environment:
+      - SPRING_REDIS_HOST=redis
+      - PUBLISH_RATE=1000
+  consumer:
+    build: ./redis-stream-consumer
+    image: vinsdocker/redis-stream-consumer
+    depends_on:
+      - redis
+    environment:
+      - SPRING_REDIS_HOST=redis
