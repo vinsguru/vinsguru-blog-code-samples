@@ -1,0 +1,35 @@
+resilience4j.retry:
+  instances:
+    ratingService:
+      maxRetryAttempts: 2
+      waitDuration: 1s
+      retryExceptions:
+        - org.springframework.web.client.HttpServerErrorException
+      ignoreExceptions:
+        - org.springframework.web.client.HttpClientErrorException
+resilience4j.circuitbreaker:
+  configs:
+    default:
+      slidingWindowType: COUNT_BASED
+      slidingWindowSize: 100
+      permittedNumberOfCallsInHalfOpenState: 10
+      waitDurationInOpenState: 10
+      failureRateThreshold: 60
+      recordExceptions:
+        - org.springframework.web.client.HttpServerErrorException
+  instances:
+    ratingService:
+      baseConfig: default
+    someOtherService:
+      registerHealthIndicator: true
+      slidingWindowSize: 10
+      permittedNumberOfCallsInHalfOpenState: 3
+      slidingWindowType: TIME_BASED
+      minimumNumberOfCalls: 20
+      waitDurationInOpenState: 50s
+      failureRateThreshold: 50
+      eventConsumerBufferSize: 10
+---
+rating:
+  service:
+    endpoint: http://localhost:7070/ratings/
