@@ -1,0 +1,15 @@
+server:
+  tomcat:
+    threads:
+      max: 15
+resilience4j.bulkhead:
+  instances:
+    ratingService:
+      maxConcurrentCalls: 10
+      maxWaitDuration: 10ms
+    productService:
+      maxConcurrentCalls: 20
+---
+rating:
+  service:
+    endpoint: http://localhost:7070/ratings/
