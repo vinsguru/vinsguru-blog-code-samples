@@ -1,10 +1,10 @@
 package com.vinsguru.webfluxsse.producer;
 
-import org.reactivestreams.Subscriber;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Sinks;
 
 @Service
 public class JokePublisher {
@@ -13,7 +13,7 @@ public class JokePublisher {
     private WebClient webClient;
 
     @Autowired
-    private Subscriber<Joke> subscriber;
+    private Sinks.Many<Joke> sink;
 
     @Scheduled(fixedRate = 3000)
     public void publish(){
@@ -21,7 +21,7 @@ public class JokePublisher {
                 .get()
                 .retrieve()
                 .bodyToMono(Joke.class)
-                .subscribe(this.subscriber::onNext);
+                .subscribe(this.sink::tryEmitNext);
     }
 
 }

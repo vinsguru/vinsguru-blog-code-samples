@@ -4,7 +4,8 @@ import com.vinsguru.webfluxsse.producer.Joke;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.client.WebClient;
-import reactor.core.publisher.DirectProcessor;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Sinks;
 
 @Configuration
 public class AppConfiguration {
@@ -19,8 +20,13 @@ public class AppConfiguration {
     }
 
     @Bean
-    public DirectProcessor<Joke> processor(){
-        return DirectProcessor.create();
+    public Sinks.Many<Joke> sink(){
+        return Sinks.many().replay().latest();
+    }
+
+    @Bean
+    public Flux<Joke> flux(Sinks.Many<Joke> sink){
+        return sink.asFlux();
     }
 
 }
