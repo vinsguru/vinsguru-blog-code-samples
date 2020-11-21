@@ -1,0 +1,87 @@
+/*
+syntax = "proto3";
+
+package calculator;
+
+option java_package = "com.vinsguru.calculator";
+option java_multiple_files = true;
+
+message Request {
+  int32 number = 1;
+}
+
+message Response {
+  int32 result = 1;
+}
+
+service CalculatorService {
+  rpc findSquare(Request) returns (Response) {};
+}*/
+
+// -------------------------------------------------------------------------------------
+/*syntax = "proto3";
+
+package calculator;
+
+option java_package = "com.vinsguru.calculator";
+option java_multiple_files = true;
+
+message Request {
+  int32 number = 1;
+}
+
+message Response {
+  int32 result = 1;
+}
+
+enum ErrorCode {
+  ABOVE_20 = 0;
+  BELOW_2 = 1;
+}
+
+message ErrorResponse {
+  int32 input = 1;
+  ErrorCode error_code = 2;
+}
+
+service CalculatorService {
+  rpc findSquare(Request) returns (Response) {};
+}*/
+
+// -------------------------------------------------------------------------------------
+
+syntax = "proto3";
+
+package calculator;
+
+option java_package = "com.vinsguru.calculator";
+option java_multiple_files = true;
+
+message Request {
+  int32 number = 1;
+}
+
+message SuccessResponse {
+  int32 result = 1;
+}
+
+enum ErrorCode {
+  ABOVE_20 = 0;
+  BELOW_2 = 1;
+}
+
+message ErrorResponse {
+  int32 input = 1;
+  ErrorCode error_code = 2;
+}
+
+message Response {
+  oneof response {
+    SuccessResponse success_response = 1;
+    ErrorResponse error_response = 2;
+  }
+}
+
+service CalculatorService {
+  rpc findSquare(Request) returns (Response) {};
+}
