@@ -1,0 +1,12 @@
+version: '3'
+services:
+  grpc-service:
+    build: ./grpc-service
+    image: vinsdocker/square-app
+  aggregator-service:
+    build: ./aggregator-service
+    image: vinsdocker/aggregator-app
+    ports:
+      - 8080:8080
+    environment:
+      - GRPC_CLIENT_SQUARE_ADDRESS=static://grpc-service:6565

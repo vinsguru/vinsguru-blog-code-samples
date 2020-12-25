@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: square-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: square-app
+  template:
+    metadata:
+      labels:
+        app: square-app
+    spec:
+      containers:
+        - name: square-app
+          image: vinsdocker/square-app
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: square-service
+spec:
+  selector:
+    app: square-app
+  ports:
+    - port: 6565
+      protocol: TCP
+      targetPort: 6565
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aggregator-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: aggregator-app
+  template:
+    metadata:
+      labels:
+        app: aggregator-app
+    spec:
+      containers:
+        - name: aggregator-app
+          image: vinsdocker/aggregator-app
+          env:
+            - name: GRPC_CLIENT_SQUARE_ADDRESS
+              value: static://square-service:6565
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: aggregator-service
+spec:
+  selector:
+    app: aggregator-app
+  ports:
+    - port: 8080
+      protocol: TCP
+      targetPort: 8080
