@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rating-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rating-app
+  template:
+    metadata:
+      labels:
+        app: rating-app
+    spec:
+      containers:
+        - name: rating-app
+          image: vinsdocker/timeout-demo-rating-service
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rating-service
+spec:
+  selector:
+    app: rating-app
+  ports:
+    - port: 7070
+      protocol: TCP
+      targetPort: 7070
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: product-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: product-app
+  template:
+    metadata:
+      labels:
+        app: product-app
+    spec:
+      containers:
+        - name: product-app
+          image: vinsdocker/timeout-demo-product-service
+          env:
+            - name: RATING_SERVICE_ENDPOINT
+              value: http://rating-service:7070/ratings/
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: product-service
+spec:
+  selector:
+    app: product-app
+  ports:
+    - port: 8080
+      protocol: TCP
+      targetPort: 8080

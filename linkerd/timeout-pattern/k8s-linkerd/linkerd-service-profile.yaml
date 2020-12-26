@@ -1,0 +1,12 @@
+apiVersion: linkerd.io/v1alpha2
+kind: ServiceProfile
+metadata:
+  name: rating-service.default.svc.cluster.local
+  namespace: default
+spec:
+  routes:
+    - condition:
+        method: GET
+        pathRegex: /ratings/[^/]*
+      name: GET /ratings/{id}
+      timeout: 1s

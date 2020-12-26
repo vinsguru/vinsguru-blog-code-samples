@@ -1,0 +1,12 @@
+version: '3'
+services:
+  product-service:
+    build: ./product-service
+    image: vinsdocker/timeout-demo-product-service
+    ports:
+      - 8080:8080
+    environment:
+      - RATING_SERVICE_ENDPOINT=http://rating-service:7070/ratings/
+  rating-service:
+    build: ./rating-service
+    image: vinsdocker/timeout-demo-rating-service
