@@ -14,7 +14,7 @@ message Output {
   int32 result = 2;
 }
 
-service SquareService {
+service SquareRpc {
   rpc findSquareUnary(Input) returns (Output) {};
-  rpc findSquareStream(stream Input) returns (stream Output) {};
+  rpc findSquareBiStream(stream Input) returns (stream Output) {};
 }
