@@ -1,0 +1,9 @@
+rsocket:
+  square-service:
+      servers:
+        - host: localhost
+          port: 6565
+        - host: localhost
+          port: 6566
+        - host: localhost
+          port: 6567
