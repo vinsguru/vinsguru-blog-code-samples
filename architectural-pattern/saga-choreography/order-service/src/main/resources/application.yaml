@@ -1,0 +1,12 @@
+server:
+  port: 8080
+spring.cloud.stream:
+  function:
+    definition: orderSupplier;paymentEventConsumer;inventoryEventConsumer
+  bindings:
+    orderSupplier-out-0:
+      destination: order-event
+    paymentEventConsumer-in-0:
+      destination: payment-event
+    inventoryEventConsumer-in-0:
+      destination: inventory-event
