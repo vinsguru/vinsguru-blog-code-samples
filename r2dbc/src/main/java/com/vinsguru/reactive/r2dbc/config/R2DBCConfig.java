@@ -4,12 +4,14 @@ import io.r2dbc.spi.ConnectionFactories;
 import io.r2dbc.spi.ConnectionFactory;
 import io.r2dbc.spi.ConnectionFactoryOptions;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 import static io.r2dbc.pool.PoolingConnectionFactoryProvider.MAX_SIZE;
 import static io.r2dbc.spi.ConnectionFactoryOptions.*;
 
-@Configuration
+// just demo
+// we can use either application.properties or this way by creating ConnectionFactory
+
+//@Configuration
 public class R2DBCConfig {
 
     @Bean
