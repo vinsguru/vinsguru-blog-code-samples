@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.vinsguru.models";
+
+message Person {
+  string name = 1;
+  int32 age = 2;
+}
