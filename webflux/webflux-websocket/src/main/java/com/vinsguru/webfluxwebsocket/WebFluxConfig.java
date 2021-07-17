@@ -17,7 +17,7 @@ public class WebFluxConfig {
     @Bean
     public HandlerMapping handlerMapping(){
         Map<String, WebFluxWebSocketHandler> handlerMap = Map.of(
-                "/test", handler
+                "/uppercase", handler
         );
         return new SimpleUrlHandlerMapping(handlerMap, 1);
     }

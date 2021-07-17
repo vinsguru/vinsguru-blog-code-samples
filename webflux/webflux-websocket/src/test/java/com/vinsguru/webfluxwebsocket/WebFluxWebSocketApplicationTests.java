@@ -17,7 +17,7 @@ class WebFluxWebSocketApplicationTests {
 	void webSocketTest() {
 
 		WebSocketClient client = new ReactorNettyWebSocketClient();
-		URI uri = URI.create("ws://localhost:8080/test");
+		URI uri = URI.create("ws://localhost:8080/uppercase");
 
 		Flux<Long> longFlux = Flux.interval(Duration.ofSeconds(1));
 		client.execute(uri, webSocketSession ->
