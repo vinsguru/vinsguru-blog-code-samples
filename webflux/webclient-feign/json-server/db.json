@@ -1,0 +1,22 @@
+{
+  "movies":[
+    {
+      "id":1,
+      "title":"Lord of the Rings - The Fellowship of the Ring",
+      "year": 2001,
+      "imdbRating": 8.8
+    },
+    {
+      "id":2,
+      "title":"Lord of the Rings - The Two Towers",
+      "year": 2002,
+      "imdbRating": 8.7
+    },
+    {
+      "id":3,
+      "title":"Lord of the Rings - The Return of the King",
+      "year": 2003,
+      "imdbRating": 8.9
+    }
+  ]
+}
