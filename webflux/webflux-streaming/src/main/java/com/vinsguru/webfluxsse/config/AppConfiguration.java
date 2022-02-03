@@ -10,7 +10,7 @@ import reactor.core.publisher.Sinks;
 @Configuration
 public class AppConfiguration {
 
-    private static final String JOKE_API_ENDPOINT = "https://official-joke-api.appspot.com/jokes/random";
+    private static final String JOKE_API_ENDPOINT = "https://joke.deno.dev/";
 
     @Bean
     public WebClient webClient(){
@@ -26,7 +26,7 @@ public class AppConfiguration {
 
     @Bean
     public Flux<Joke> flux(Sinks.Many<Joke> sink){
-        return sink.asFlux();
+        return sink.asFlux().cache();
     }
 
 }

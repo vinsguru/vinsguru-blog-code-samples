@@ -6,10 +6,10 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @EnableScheduling
 @SpringBootApplication
-public class WebFluxSSEApplication {
+public class WebFluxStreamApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(WebFluxSSEApplication.class, args);
+		SpringApplication.run(WebFluxStreamApplication.class, args);
 	}
 
 }

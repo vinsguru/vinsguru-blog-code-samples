@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 
 @RestController
-public class SSEController {
+public class StreamController {
 
     @Autowired
     private Flux<Joke> flux;
 
-    @GetMapping(value = "/joke", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    @GetMapping(value = "joke", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Flux<Joke> getJoke(){
         return flux;
     }
