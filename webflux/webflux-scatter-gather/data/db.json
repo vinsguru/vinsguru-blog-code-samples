@@ -1,0 +1,59 @@
+{
+  "products":[
+    {
+      "id":1,
+      "description":"iphone",
+      "category": "electronics"
+    },
+    {
+      "id":2,
+      "description":"air-fryer",
+      "category": "kitchen"
+    },
+    {
+      "id":3,
+      "description":"calming pet bed",
+      "category": "pet supplies"
+    }
+  ],
+  "promotions":[
+    {
+      "id":1,
+      "type":"christmas sale",
+      "discount": 12.0,
+      "endDate": "2022-12-26"
+    },
+    {
+      "id":3,
+      "type":"new year sale",
+      "discount": 6.0,
+      "endDate": "2022-12-31"
+    }
+  ],
+  "reviews":[
+    {
+      "productId": 1,
+      "user": "sam",
+      "rating": 4,
+      "comment": "it is good"
+    },
+    {
+      "productId": 1,
+      "user": "mike",
+      "rating": 5,
+      "comment": "i love my phone. it works great"
+    },
+    {
+      "productId": 2,
+      "user": "jake",
+      "rating": 2,
+      "comment": "stopped working after 2 weeks :("
+    },
+    {
+      "productId": 2,
+      "user": "dre",
+      "rating": 3,
+      "comment": "good so far"
+    }
+  ]
+}

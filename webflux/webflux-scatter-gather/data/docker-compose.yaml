@@ -1,0 +1,8 @@
+version: '3'
+services:
+  server:
+    image: clue/json-server
+    ports:
+      - "3000:80"
+    volumes:
+      - ${PWD}/db.json:/data/db.json
