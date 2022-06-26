@@ -30,6 +30,6 @@ services:
     depends_on:
       - nats-server
     ports:
-      - 8080:8080
+      - "8080:8080"
     environment:
       - NATS_SERVER=nats://nats-server:4222
