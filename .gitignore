@@ -48,3 +48,4 @@
 **/mvnw
 **/mvnw.cmd
 **/spring-grpc-math-service/
+**/node_modules/
