@@ -1,7 +1,7 @@
 package com.vinsguru.reactivemongo.repository;
 
 import com.vinsguru.reactivemongo.entity.Freelancer;
-import com.vinsguru.reactivemongo.entity.SkilledPeople;
+import com.vinsguru.reactivemongo.projection.SkilledPeople;
 import org.springframework.data.mongodb.repository.Aggregation;
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 import org.springframework.stereotype.Repository;

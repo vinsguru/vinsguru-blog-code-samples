@@ -8,6 +8,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRepositories;
 
+import java.time.Duration;
+
 @SpringBootApplication
 @EnableReactiveMongoRepositories
 public class ReactiveMongoApplication implements CommandLineRunner {
@@ -24,15 +26,18 @@ public class ReactiveMongoApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
+
 		// approach - 1
 		this.repository
 				.getSkilledPeople()
-				.subscribe(System.out::println);
+				.doOnNext(System.out::println)
+				.blockLast(Duration.ofSeconds(10));
 
 		// approach - 2
 		this.service
 				.getSkilledPeople()
-				.subscribe(System.out::println);
-
+				.doOnNext(System.out::println)
+				.blockLast(Duration.ofSeconds(10));
+		
 	}
 }

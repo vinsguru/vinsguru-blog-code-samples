@@ -1,4 +1,4 @@
-package com.vinsguru.reactivemongo.entity;
+package com.vinsguru.reactivemongo.projection;
 
 import lombok.Data;
 import lombok.ToString;
