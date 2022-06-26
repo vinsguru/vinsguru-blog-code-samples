@@ -3,28 +3,34 @@ package com.vinsguru.grpcserver;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 
-import java.io.IOException;
-
 public class CalculatorServer {
 
-    public static void main(String[] args) throws IOException, InterruptedException {
+    private Server server;
 
-        // build gRPC server
-        Server server = ServerBuilder.forPort(6565)
-                .addService(new CalculatorService())
-                .build();
+    public void start(){
+       try{
+           // build gRPC server
+           this.server = ServerBuilder.forPort(6565)
+                                      .addService(new CalculatorService())
+                                      .build();
 
-        // start
-        server.start();
+           // start
+           server.start();
 
-        // shutdown hook
-        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            System.out.println("gRPC server is shutting down!");
-            server.shutdown();
-        }));
+           // shutdown hook
+           Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+               System.out.println("gRPC server is shutting down!");
+               server.shutdown();
+           }));
 
-        server.awaitTermination();
+           server.awaitTermination();
+       }catch (Exception e){
+           e.printStackTrace();
+       }
+    }
 
+    public void stop(){
+        this.server.shutdownNow();
     }
 
 }

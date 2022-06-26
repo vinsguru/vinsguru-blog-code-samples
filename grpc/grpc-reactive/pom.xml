@@ -9,10 +9,10 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <reactive.grpc.version>1.0.1</reactive.grpc.version>
-        <grpc.version>1.31.1</grpc.version>
+        <reactive.grpc.version>1.2.3</reactive.grpc.version>
+        <grpc.version>1.47.0</grpc.version>
         <protoc.version>3.9.0</protoc.version>
-        <reactor.version>3.3.9.RELEASE</reactor.version>
+        <reactor.version>3.4.18</reactor.version>
     </properties>
 
     <dependencies>
@@ -26,30 +26,45 @@
             <artifactId>grpc-protobuf</artifactId>
             <version>${grpc.version}</version>
         </dependency>
+
         <dependency>
             <groupId>io.grpc</groupId>
             <artifactId>grpc-stub</artifactId>
             <version>${grpc.version}</version>
         </dependency>
         <dependency>
+            <groupId>io.projectreactor</groupId>
+            <artifactId>reactor-core</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.salesforce.servicelibs</groupId>
             <artifactId>reactor-grpc-stub</artifactId>
             <version>${reactive.grpc.version}</version>
         </dependency>
+
         <dependency>
             <groupId>io.projectreactor</groupId>
             <artifactId>reactor-test</artifactId>
-            <version>${reactor.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.13</version>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>5.8.2</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
-
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>io.projectreactor</groupId>
+                <artifactId>reactor-bom</artifactId>
+                <version>2020.0.20</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
     <build>
         <extensions>
             <extension>
@@ -63,8 +78,8 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>12</source>
-                    <target>12</target>
+                    <source>11</source>
+                    <target>11</target>
                 </configuration>
             </plugin>
             <plugin>
@@ -74,11 +89,11 @@
                 <extensions>true</extensions>
                 <configuration>
                     <protocArtifact>
-                        com.google.protobuf:protoc:3.6.1:exe:${os.detected.classifier}
+                        com.google.protobuf:protoc:3.19.2:exe:${os.detected.classifier}
                     </protocArtifact>
                     <pluginId>grpc-java</pluginId>
                     <pluginArtifact>
-                        io.grpc:protoc-gen-grpc-java:1.22.1:exe:${os.detected.classifier}
+                        io.grpc:protoc-gen-grpc-java:1.47.0:exe:${os.detected.classifier}
                     </pluginArtifact>
                     <protoSourceRoot>
                         ${basedir}/src/main/proto/
@@ -96,7 +111,7 @@
                                     <id>reactor-grpc</id>
                                     <groupId>com.salesforce.servicelibs</groupId>
                                     <artifactId>reactor-grpc</artifactId>
-                                    <version>1.0.1</version>
+                                    <version>${reactive.grpc.version}</version>
                                     <mainClass>com.salesforce.reactorgrpc.ReactorGrpcGenerator</mainClass>
                                 </protocPlugin>
                             </protocPlugins>

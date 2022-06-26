@@ -3,25 +3,31 @@ package com.vinsguru.grpcclient;
 import com.vinsguru.calculator.Input;
 import com.vinsguru.calculator.Output;
 import com.vinsguru.calculator.ReactorCalculatorServiceGrpc;
-import io.grpc.ManagedChannel;
+import com.vinsguru.grpcserver.CalculatorServer;
 import io.grpc.ManagedChannelBuilder;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Flux;
 import reactor.test.StepVerifier;
 
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+
 public class ReactiveGrpcTest {
 
-    private ManagedChannel channel;
-    private ReactorCalculatorServiceGrpc.ReactorCalculatorServiceStub serviceStub;
+    private static final CalculatorServer SERVER = new CalculatorServer();
+    private static final Executor EXECUTOR = Executors.newSingleThreadExecutor();
+    private static ReactorCalculatorServiceGrpc.ReactorCalculatorServiceStub serviceStub;
 
-    @Before
-    public void setup(){
-        this.channel = ManagedChannelBuilder
+    @BeforeAll
+    public static void setup() throws Exception {
+        EXECUTOR.execute(SERVER::start);
+        var channel = ManagedChannelBuilder
                 .forAddress("localhost", 6565)
                 .usePlaintext()
                 .build();
-        this.serviceStub = ReactorCalculatorServiceGrpc.newReactorStub(channel);
+        serviceStub = ReactorCalculatorServiceGrpc.newReactorStub(channel);
     }
 
     @Test
@@ -29,7 +35,7 @@ public class ReactiveGrpcTest {
         Input input = Input.newBuilder()
                 .setNumber(5)
                 .build();
-        this.serviceStub.findSquare(input)
+        serviceStub.findSquare(input)
                 .map(Output::getResult)
                 .as(StepVerifier::create)
                 .expectNext(25L)
@@ -41,7 +47,7 @@ public class ReactiveGrpcTest {
         Input input = Input.newBuilder()
                 .setNumber(20)
                 .build();
-        this.serviceStub.findFactors(input)
+        serviceStub.findFactors(input)
                 .map(Output::getResult)
                 .as(StepVerifier::create)
                 .expectNext(2L, 4L, 5L, 10L)
@@ -52,11 +58,16 @@ public class ReactiveGrpcTest {
     public void sumAllTest(){
         Flux<Input> inputFlux = Flux.range(1, 10)
                 .map(i -> Input.newBuilder().setNumber(i).build());
-        this.serviceStub.findSum(inputFlux)
+        serviceStub.findSum(inputFlux)
                 .map(Output::getResult)
                 .as(StepVerifier::create)
                 .expectNext(55L)
                 .verifyComplete();
+    }
+
+    @AfterAll
+    public static void stop(){
+       SERVER.stop();
     }
 
 }
