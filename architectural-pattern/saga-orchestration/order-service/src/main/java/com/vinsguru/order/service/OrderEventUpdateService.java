@@ -4,8 +4,7 @@ import com.vinsguru.dto.OrchestratorResponseDTO;
 import com.vinsguru.order.repository.PurchaseOrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
+import reactor.core.publisher.Mono;
 
 @Service
 public class OrderEventUpdateService {
@@ -13,14 +12,11 @@ public class OrderEventUpdateService {
     @Autowired
     private PurchaseOrderRepository repository;
 
-    @Transactional
-    public void updateOrder(final OrchestratorResponseDTO responseDTO){
-        this.repository
-                .findById(responseDTO.getOrderId())
-                .ifPresent(po -> {
-                    po.setStatus(responseDTO.getStatus());
-                    this.repository.save(po);
-                });
+    public Mono<Void> updateOrder(final OrchestratorResponseDTO responseDTO){
+        return this.repository.findById(responseDTO.getOrderId())
+                .doOnNext(p -> p.setStatus(responseDTO.getStatus()))
+                .flatMap(this.repository::save)
+                .then();
     }
 
 }

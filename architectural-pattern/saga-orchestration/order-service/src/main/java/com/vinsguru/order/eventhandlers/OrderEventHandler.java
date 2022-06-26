@@ -16,20 +16,22 @@ import java.util.function.Supplier;
 public class OrderEventHandler {
 
     @Autowired
-    private DirectProcessor<OrchestratorRequestDTO> source;
+    private Flux<OrchestratorRequestDTO> flux;
 
     @Autowired
     private OrderEventUpdateService service;
 
     @Bean
     public Supplier<Flux<OrchestratorRequestDTO>> supplier(){
-        return () -> Flux.from(source);
+        return () -> flux;
     };
 
     @Bean
     public Consumer<Flux<OrchestratorResponseDTO>> consumer(){
-        return (flux) -> flux
-                            .subscribe(responseDTO -> this.service.updateOrder(responseDTO));
+        return f -> f
+                .doOnNext(c -> System.out.println("Consuming :: " + c))
+                .flatMap(responseDTO -> this.service.updateOrder(responseDTO))
+                .subscribe();
     };
 
 }

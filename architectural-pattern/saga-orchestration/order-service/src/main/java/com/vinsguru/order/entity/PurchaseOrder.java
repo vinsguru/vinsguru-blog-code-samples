@@ -3,13 +3,10 @@ package com.vinsguru.order.entity;
 import com.vinsguru.enums.OrderStatus;
 import lombok.Data;
 import lombok.ToString;
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import org.springframework.data.annotation.Id;
 import java.util.UUID;
 
 @Data
-@Entity
 @ToString
 public class PurchaseOrder {
 

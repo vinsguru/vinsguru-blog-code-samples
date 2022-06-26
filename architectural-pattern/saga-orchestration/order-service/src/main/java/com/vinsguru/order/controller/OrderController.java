@@ -6,9 +6,8 @@ import com.vinsguru.order.entity.PurchaseOrder;
 import com.vinsguru.order.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.UUID;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @RestController
 @RequestMapping("order")
@@ -18,13 +17,13 @@ public class OrderController {
     private OrderService service;
 
     @PostMapping("/create")
-    public PurchaseOrder createOrder(@RequestBody OrderRequestDTO requestDTO){
-        requestDTO.setOrderId(UUID.randomUUID());
-        return this.service.createOrder(requestDTO);
+    public Mono<PurchaseOrder> createOrder(@RequestBody Mono<OrderRequestDTO> mono){
+        return mono
+                .flatMap(this.service::createOrder);
     }
 
     @GetMapping("/all")
-    public List<OrderResponseDTO> getOrders(){
+    public Flux<OrderResponseDTO> getOrders(){
         return this.service.getAll();
     }
 

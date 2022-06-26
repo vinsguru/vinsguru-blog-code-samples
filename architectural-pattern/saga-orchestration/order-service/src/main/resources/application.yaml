@@ -8,3 +8,7 @@ spring.cloud.stream:
       destination: order-created
     consumer-in-0:
       destination: order-updated
+---
+spring:
+  jpa:
+    defer-datasource-initialization: true
