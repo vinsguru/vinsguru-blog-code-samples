@@ -8,11 +8,11 @@ import com.vinsguru.order.entity.PurchaseOrder;
 import com.vinsguru.order.repository.PurchaseOrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import reactor.core.publisher.FluxSink;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+import reactor.core.publisher.Sinks;
 
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @Service
 public class OrderService {
@@ -28,19 +28,21 @@ public class OrderService {
     private PurchaseOrderRepository purchaseOrderRepository;
 
     @Autowired
-    private FluxSink<OrchestratorRequestDTO> sink;
+    private Sinks.Many<OrchestratorRequestDTO> sink;
 
-    public PurchaseOrder createOrder(OrderRequestDTO orderRequestDTO){
-        PurchaseOrder purchaseOrder = this.purchaseOrderRepository.save(this.dtoToEntity(orderRequestDTO));
-        this.sink.next(this.getOrchestratorRequestDTO(orderRequestDTO));
-        return purchaseOrder;
+    public Mono<PurchaseOrder> createOrder(OrderRequestDTO orderRequestDTO){
+        return this.purchaseOrderRepository.save(this.dtoToEntity(orderRequestDTO))
+                .doOnNext(e -> orderRequestDTO.setOrderId(e.getId()))
+                .doOnNext(e -> this.emitEvent(orderRequestDTO));
     }
 
-    public List<OrderResponseDTO> getAll() {
+    public Flux<OrderResponseDTO> getAll() {
         return this.purchaseOrderRepository.findAll()
-                .stream()
-                .map(this::entityToDto)
-                .collect(Collectors.toList());
+                .map(this::entityToDto);
+    }
+
+    private void emitEvent(OrderRequestDTO orderRequestDTO){
+        this.sink.tryEmitNext(this.getOrchestratorRequestDTO(orderRequestDTO));
     }
 
     private PurchaseOrder dtoToEntity(final OrderRequestDTO dto){

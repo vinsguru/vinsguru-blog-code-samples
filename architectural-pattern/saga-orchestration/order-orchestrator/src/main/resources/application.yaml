@@ -9,6 +9,9 @@ spring.cloud.stream:
       destination: order-created
     processor-out-0:
       destination: order-updated
+  kafka:
+    binder:
+      replication-factor: 1
 ---
 service:
   endpoints:
