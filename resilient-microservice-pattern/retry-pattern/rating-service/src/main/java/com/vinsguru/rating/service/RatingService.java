@@ -17,7 +17,7 @@ public class RatingService {
     private void init(){
 
         // product 1
-        ProductRatingDto ratingDto1 = ProductRatingDto.of(4.5,
+        var ratingDto1 = ProductRatingDto.of(4.5,
                 List.of(
                         ReviewDto.of("vins", "guru", 1, 5, "excellent"),
                         ReviewDto.of("marshall", "mathers", 1, 4, "decent")
@@ -25,7 +25,7 @@ public class RatingService {
         );
 
         // product 2
-        ProductRatingDto ratingDto2 = ProductRatingDto.of(4,
+        var ratingDto2 = ProductRatingDto.of(4,
                 List.of(
                         ReviewDto.of("slim", "shady", 2, 5, "best"),
                         ReviewDto.of("fifty", "cent", 2, 3, "")
