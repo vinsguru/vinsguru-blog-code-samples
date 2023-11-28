@@ -2,9 +2,9 @@ package com.vinsguru.rating.service;
 
 import com.vinsguru.dto.ProductRatingDto;
 import com.vinsguru.dto.ReviewDto;
+import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import java.util.List;
 import java.util.Map;
 

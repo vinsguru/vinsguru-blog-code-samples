@@ -4,7 +4,7 @@ import com.vinsguru.dto.ProductRatingDto;
 import com.vinsguru.dto.ReviewDto;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 import java.util.List;
 import java.util.Map;
 

@@ -2,7 +2,7 @@ resilience4j.retry:
   instances:
     ratingService:
       maxRetryAttempts: 3
-      waitDuration: 5s
+      waitDuration: 1s
       retryExceptions:
         - org.springframework.web.client.HttpServerErrorException
       ignoreExceptions:
@@ -17,3 +17,8 @@ resilience4j.retry:
 rating:
   service:
     endpoint: http://localhost:7070/ratings/
+---
+spring:
+  threads:
+    virtual:
+      enabled: true

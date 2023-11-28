@@ -1,4 +1,4 @@
-package com.vinsguru.product.config;
+package com.vinsguru.product;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

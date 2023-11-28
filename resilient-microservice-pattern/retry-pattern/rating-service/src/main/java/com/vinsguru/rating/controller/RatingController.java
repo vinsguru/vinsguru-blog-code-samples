@@ -21,17 +21,16 @@ public class RatingController {
     @GetMapping("{prodId}")
     public ResponseEntity<ProductRatingDto> getRating(@PathVariable int prodId) {
         ProductRatingDto productRatingDto = this.ratingService.getRatingForProduct(prodId);
-        return this.failRandomly(productRatingDto);
+        return this.failAtRandom(productRatingDto);
     }
 
-    private ResponseEntity<ProductRatingDto> failRandomly(ProductRatingDto productRatingDto){
-        int random = ThreadLocalRandom.current().nextInt(1, 4);
-        if(random < 2){
-            return ResponseEntity.status(500).build();
-        }else if(random < 3){
-            return ResponseEntity.badRequest().build();
-        }
-        return ResponseEntity.ok(productRatingDto);
+    private ResponseEntity<ProductRatingDto> failAtRandom(ProductRatingDto productRatingDto){
+        int random = ThreadLocalRandom.current().nextInt(1, 5);
+        return switch (random){
+            case 1,2 -> ResponseEntity.status(500).build();
+            case 3 -> ResponseEntity.badRequest().build();
+            default -> ResponseEntity.ok(productRatingDto);
+        };
     }
 
 }
