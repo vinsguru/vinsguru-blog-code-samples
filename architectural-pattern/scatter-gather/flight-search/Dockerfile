@@ -1,4 +1,4 @@
-FROM openjdk:11.0.6-jre-slim
+FROM bellsoft/liberica-openjdk-alpine:21
 
 WORKDIR /usr/app
 
