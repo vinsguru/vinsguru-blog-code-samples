@@ -4,3 +4,8 @@ resilience4j.ratelimiter:
       limitForPeriod: 5
       limitRefreshPeriod: 60s
       timeoutDuration: 0
+---
+spring:
+  threads:
+    virtual:
+      enabled: true

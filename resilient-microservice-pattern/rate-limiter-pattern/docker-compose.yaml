@@ -1,0 +1,7 @@
+version: '3'
+services:
+  compute-service:
+    build: .
+    image: vinsdocker/compute-service
+    ports:
+      - "8080:8080"
