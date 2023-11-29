@@ -20,7 +20,7 @@ public class RatingController {
 
     @GetMapping("{prodId}")
     public ResponseEntity<ProductRatingDto> getRating(@PathVariable int prodId) throws InterruptedException {
-        ProductRatingDto productRatingDto = this.ratingService.getRatingForProduct(prodId);
+        var productRatingDto = this.ratingService.getRatingForProduct(prodId);
         return this.failRandomly(productRatingDto);
     }
 
@@ -28,7 +28,7 @@ public class RatingController {
         // simulate delay
         Thread.sleep(100);
         // simulate failure
-        int random = ThreadLocalRandom.current().nextInt(1, 4);
+        var random = ThreadLocalRandom.current().nextInt(1, 4);
         if(random < 3)
             return ResponseEntity.status(500).build();
         return ResponseEntity.ok(productRatingDto);

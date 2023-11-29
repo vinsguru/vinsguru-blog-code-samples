@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.concurrent.CompletableFuture;
+
 @RestController
 @RequestMapping("product")
 public class ProductController {
@@ -16,7 +18,7 @@ public class ProductController {
     private ProductService productService;
 
     @GetMapping("{productId}")
-    public ProductDto getProduct(@PathVariable int productId){
+    public CompletableFuture<ProductDto> getProduct(@PathVariable int productId){
         return this.productService.getProductDto(productId);
     }
 

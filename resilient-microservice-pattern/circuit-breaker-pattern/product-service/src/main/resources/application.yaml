@@ -11,7 +11,7 @@ resilience4j.circuitbreaker:
   configs:
     default:
       slidingWindowType: COUNT_BASED
-      slidingWindowSize: 100
+      slidingWindowSize: 10
       permittedNumberOfCallsInHalfOpenState: 10
       waitDurationInOpenState: 10
       failureRateThreshold: 60
@@ -33,3 +33,8 @@ resilience4j.circuitbreaker:
 rating:
   service:
     endpoint: http://localhost:7070/ratings/
+---
+spring:
+  threads:
+    virtual:
+      enabled: true

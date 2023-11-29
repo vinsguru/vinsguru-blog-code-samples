@@ -23,15 +23,13 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
-         <dependency>
-             <groupId>io.github.resilience4j</groupId>
-             <artifactId>resilience4j-spring-boot2</artifactId>
-             <version>1.6.1</version>
-         </dependency>
+        <dependency>
+            <groupId>io.github.resilience4j</groupId>
+            <artifactId>resilience4j-spring-boot3</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.vinsguru</groupId>
             <artifactId>common-dto</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
 

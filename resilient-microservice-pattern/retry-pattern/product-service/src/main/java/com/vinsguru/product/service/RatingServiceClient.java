@@ -35,7 +35,7 @@ public class RatingServiceClient {
 
     private CompletionStage<ProductRatingDto> onError(int productId, Throwable throwable) {
         log.error("error", throwable);
-        return CompletableFuture.completedStage(ProductRatingDto.of(0, Collections.emptyList()));
+        return CompletableFuture.completedFuture(ProductRatingDto.of(0, Collections.emptyList()));
     }
 
 }

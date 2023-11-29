@@ -1,34 +1,38 @@
 package com.vinsguru.product.service;
 
 import com.vinsguru.dto.ProductDto;
-import com.vinsguru.dto.ProductRatingDto;
 import com.vinsguru.product.entity.Product;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.annotation.PostConstruct;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
 
 @Service
+@AllArgsConstructor
 public class ProductService {
 
-    private Map<Integer, Product> map;
+    private final RatingServiceClient ratingServiceClient;
+    private final ExecutorService executorService;
 
-    @Autowired
-    private RatingServiceClient ratingServiceClient;
+    // assume this would be DB in real life
+    private Map<Integer, Product> db;
 
     @PostConstruct
     private void init(){
-        this.map = Map.of(
+        this.db = Map.of(
                 1, Product.of(1, "Blood On The Dance Floor", 12.45),
                 2, Product.of(2, "The Eminem Show", 12.12)
         );
     }
 
-    public ProductDto getProductDto(int productId){
-        ProductRatingDto ratingDto = this.ratingServiceClient.getProductRatingDto(1);
-        Product product = this.map.get(productId);
-        return ProductDto.of(productId, product.getDescription(), product.getPrice(), ratingDto);
+    public CompletableFuture<ProductDto> getProductDto(int productId){
+        // assuming this is a DB call
+        var product = CompletableFuture.supplyAsync(() -> this.db.get(productId), executorService);
+        var rating = this.ratingServiceClient.getProductRatingDto(productId);
+        return product.thenCombine(rating, (p, r) -> ProductDto.of(productId, p.getDescription(), p.getPrice(), r));
     }
 
 }
