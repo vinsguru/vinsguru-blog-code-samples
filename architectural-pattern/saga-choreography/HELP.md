@@ -1,4 +1,4 @@
-# Saga Pattern - Orchestration
+# Saga Pattern - Choreography
 
 This is a sample project to demo saga pattern.
 
